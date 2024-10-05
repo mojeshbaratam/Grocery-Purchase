@@ -32,16 +32,29 @@ func main() {
 	})
 
 	// Setup routes
-	router.POST("/user/login", controllers.UserLogin)
 	router.POST("/admin/login", controllers.AdminLogin)
+	router.POST("/admin/register", controllers.RegisterAdmin)
+	
 	router.POST("/admin/store", controllers.CreateStore)
-	router.POST("/admin/product", controllers.CreateProduct)
 	router.GET("/admin/stores", controllers.GetStores)
-	// router.GET("/user/product", controllers.GetProducts)
+	router.PUT("/admin/store/name/:name", controllers.UpdateStore)
+	router.DELETE("/admin/store/name/:name", controllers.RemoveStore) 
 
-		// Setup routes
-	router.POST("/user/register", controllers.RegisterUser) // Add this line
+	router.POST("/admin/product", controllers.CreateProduct)
+	router.GET("/products", controllers.GetProducts)
+	router.GET("/products/name/:name", controllers.GetProductsByName)
+	router.PUT("/admin/product/name/:name", controllers.UpdateProduct)
+	router.DELETE("/admin/product/name/:name", controllers.RemoveProduct) 
 
+	router.POST("/ratings", controllers.CreateRating)
+	router.GET("/products/:product_id/ratings", controllers.GetRatings)
+
+	router.POST("/user/register", controllers.RegisterUser) 
+	router.POST("/user/login", controllers.UserLogin)
+	router.POST("/user/cart/add", controllers.AddProductToCart)   // Add product to cart
+	router.GET("/user/cart/view", controllers.ViewCart)           // View the cart
+	router.POST("/user/cart/purchase", controllers.PurchaseCart)  // Purchase items in the cart
+	
 
 	// Run the server
 	if err := router.Run(":8080"); err != nil {

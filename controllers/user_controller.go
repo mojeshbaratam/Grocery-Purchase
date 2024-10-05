@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"database/sql"
+	"log"
 )
 
 func UserLogin(c *gin.Context) {
@@ -27,6 +28,8 @@ func UserLogin(c *gin.Context) {
 }
 
 func RegisterUser(c *gin.Context) {
+	log.Println("Received request to create user:")
+
 	var user models.User
 
 	if err := c.ShouldBindJSON(&user); err != nil {
